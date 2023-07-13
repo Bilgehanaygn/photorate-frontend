@@ -1,6 +1,6 @@
 "use client";
 import Button from "@mui/material/Button";
-import { FileInput } from "../../../lib/components/FileInput";
+import { FileInput } from "../../../lib/components/src/FileInput";
 import { useState } from "react";
 import { getImageByName, uploadImages } from "./api";
 import { ToastContainer, toast } from "react-toastify";

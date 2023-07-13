@@ -48,7 +48,7 @@ export function FileInput(props: FileInputProps) {
       <MuiFileInput
         label={props.label}
         inputProps={{
-          "aria-label": `${props.name}-dosya-input`,
+          "aria-label": `${props.name}-file-input`,
           type: "file",
           accept: fileUploadConfig.acceptedFileTypes,
         }}
