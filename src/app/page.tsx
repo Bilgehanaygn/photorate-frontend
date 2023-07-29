@@ -1,15 +1,15 @@
 "use client";
-import Image from "next/image";
-import styles from "./page.module.css";
-import CssBaseline from "@mui/material/CssBaseline";
 import { ToastContainer } from "react-toastify";
+import { Layout } from "../../lib/layout/Layout";
+import { Private } from "../../lib/private/Private";
 
-export default function Home() {
+const App = function () {
   return (
-    <>
-      <CssBaseline />
-      <main className={styles.main}>dsadas</main>
+    <div>
+      <Layout>Home</Layout>
       <ToastContainer />
-    </>
+    </div>
   );
-}
+};
+
+export default App;

@@ -1,14 +1,15 @@
 "use client";
-import Button from "@mui/material/Button";
 import { FileInput } from "../../../lib/components/src/FileInput";
 import { useState } from "react";
 import { getImageByName, uploadImages } from "./api";
 import { ToastContainer, toast } from "react-toastify";
 import { base64ImageToFile } from "./models";
+import axios from "axios";
 
 export default function Image() {
   const [files, setFiles] = useState<File[] | undefined>();
   const [image, setImage] = useState<string | undefined>();
+  const [] = useState();
 
   const handleChange = async (targetFiles: File[]) => {
     setFiles(targetFiles);
@@ -34,22 +35,35 @@ export default function Image() {
   };
 
   return (
-    <div style={{ background: "aliceblue", width: "100vw", height: "100vh" }}>
-      <FileInput
-        name="imageFileInput"
-        label="Select an image"
-        disabled={false}
-        handleRefChange={handleChange}
-        value={files}
-      />
-      <Button variant="contained" onClick={handleUploadClick}>
-        Upload
-      </Button>
-      <Button variant="contained" onClick={handleGetClick}>
-        Get Image
-      </Button>
-      {image ? <img src={image} alt="image alter" /> : null}
-      <ToastContainer />
-    </div>
+    <>
+      <div
+        style={{ border: "2px solid black" }}
+        onClick={() => {
+          let { data } = axios.post("http://localhost:8080/api/v1/auth/login", {
+            phoneNum: "5054021002",
+            otp: "9RqnaQqP",
+          });
+        }}
+      >
+        sadsadsadsadsadas
+      </div>
+    </>
+    // <div style={{ background: "aliceblue", width: "100vw", height: "100vh" }}>
+    //   <FileInput
+    //     name="imageFileInput"
+    //     label="Select an image"
+    //     disabled={false}
+    //     handleRefChange={handleChange}
+    //     value={files}
+    //   />
+    //   <Button variant="contained" onClick={handleUploadClick}>
+    //     Upload
+    //   </Button>
+    //   <Button variant="contained" onClick={handleGetClick}>
+    //     Get Image
+    //   </Button>
+    //   {image ? <img src={image} alt="image alter" /> : null}
+    //   <ToastContainer />
+    // </div>
   );
 }
