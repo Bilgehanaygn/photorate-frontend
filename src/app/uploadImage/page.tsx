@@ -5,6 +5,7 @@ import { getImageByName, uploadImages } from "./api";
 import { ToastContainer, toast } from "react-toastify";
 import { base64ImageToFile } from "./models";
 import axios from "axios";
+import { Layout } from "../../../lib/layout/Layout";
 
 export default function Image() {
   const [files, setFiles] = useState<File[] | undefined>();
@@ -35,19 +36,7 @@ export default function Image() {
   };
 
   return (
-    <>
-      <div
-        style={{ border: "2px solid black" }}
-        onClick={() => {
-          let { data } = axios.post("http://localhost:8080/api/v1/auth/login", {
-            phoneNum: "5054021002",
-            otp: "9RqnaQqP",
-          });
-        }}
-      >
-        sadsadsadsadsadas
-      </div>
-    </>
+    <Layout></Layout>
     // <div style={{ background: "aliceblue", width: "100vw", height: "100vh" }}>
     //   <FileInput
     //     name="imageFileInput"

@@ -1,9 +1,12 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { MessageResponse } from "../messageresponse/MessageResponse";
 import { toast } from "react-toastify";
-import { NextRouter } from "next/router";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
-export const configureAxios = (logoutUser: () => void, router: NextRouter) => {
+export const configureAxios = (
+  logoutUser: () => void,
+  router: AppRouterInstance
+) => {
   axios.defaults.baseURL = "/api/v1";
   axios.interceptors.response.use(successfullResponseInterceptor, (error) =>
     errorResponseInterceptor(error, logoutUser, router)
@@ -13,7 +16,7 @@ export const configureAxios = (logoutUser: () => void, router: NextRouter) => {
 const errorResponseInterceptor = (
   error: AxiosError,
   logoutUser: () => void,
-  router: NextRouter
+  router: AppRouterInstance
 ) => {
   if (
     error.response !== undefined &&

@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import ReduxProvider from "../../lib/provider/Provider";
 
-// const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Beauty Check",
@@ -16,9 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        // className={inter.className}
+        className={inter.className}
         style={{ margin: 0, padding: 0, backgroundColor: "#1b1b2a" }}
       >
+        <div id="portal"></div>
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>

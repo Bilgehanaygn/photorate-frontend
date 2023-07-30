@@ -1,14 +1,20 @@
 "use client";
 import { ToastContainer } from "react-toastify";
 import { Layout } from "../../lib/layout/Layout";
-import { Private } from "../../lib/private/Private";
 
 const App = function () {
+  // app ilk acildiginde getLoggedInUser istegi attin, istek basarili sonuclandiysa dispatch(login()) yaptin
+  // basarisizsa login pagee yonlendirdin.
+  // App ancak globalState'te user var ise goruntulemeli
+  // all implemented in private component
+
   return (
-    <div>
-      <Layout>Home</Layout>
+    <>
+      <Layout>
+        <div>dsadsadas</div>
+      </Layout>
       <ToastContainer />
-    </div>
+    </>
   );
 };
 

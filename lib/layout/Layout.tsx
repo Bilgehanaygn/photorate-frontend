@@ -3,6 +3,7 @@ import { useState } from "react";
 import { SIDEBAR_WIDTH, Sidebar } from "./SideBar";
 import styled from "styled-components";
 import { AppBar } from "./AppBar";
+import { Private } from "../private/Private";
 import { breakpoint } from "@/app/global-styles";
 
 const LayoutRoot = styled.div`
@@ -34,16 +35,18 @@ export function Layout(props: { children?: JSX.Element | JSX.Element[] }) {
 
   return (
     <>
-      <LayoutRoot>
-        <AppBar
-          toggleSidebar={toggleSidebar}
-          sidebarOpen={sidebarOpen}
-        ></AppBar>
-        <Sidebar open={sidebarOpen} />
-        <LayoutContainer breaksDown={breaksDown} sidebarOpen={sidebarOpen}>
-          {props.children}
-        </LayoutContainer>
-      </LayoutRoot>
+      <Private>
+        <LayoutRoot>
+          <AppBar
+            toggleSidebar={toggleSidebar}
+            sidebarOpen={sidebarOpen}
+          ></AppBar>
+          <Sidebar open={sidebarOpen} />
+          <LayoutContainer breaksDown={breaksDown} sidebarOpen={sidebarOpen}>
+            {props.children}
+          </LayoutContainer>
+        </LayoutRoot>
+      </Private>
     </>
   );
 }
