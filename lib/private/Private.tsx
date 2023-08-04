@@ -2,9 +2,10 @@
 import { getLoggedInUser } from "../api/user";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { useEffect } from "react";
-import { configureAxios } from "../utils/configureAxios";
-import { useRouter } from "next/navigation";
+// import { configureAxios } from "../utils/configureAxios";
+import { usePathname, useRouter } from "next/navigation";
 import { login, logout } from "../slices/userSlice";
+import { useState } from "react";
 
 //make a separate component later
 const Blocked = function () {
@@ -12,25 +13,46 @@ const Blocked = function () {
 };
 
 export function Private(props: { children: JSX.Element | JSX.Element[] }) {
+  const [loading, setLoading] = useState<boolean>(true);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const pathname = usePathname();
+  const isLoginPage = pathname === "/login";
 
   const isAuthenticated = useAppSelector(
     (state) => state.user.userInfo !== undefined
   );
 
   useEffect(() => {
-    configureAxios(() => dispatch(logout()), router);
+    // configureAxios(() => dispatch(logout()), router);
     async function setCurrentUser() {
       try {
         const user = await getLoggedInUser();
         dispatch(login(user));
+        if (pathname === "/login") {
+          router.push("/");
+        }
       } catch (err) {
-        router.push("/login");
+        if (pathname !== "login") {
+          router.push("/login");
+        }
       }
+      setLoading(false);
     }
     setCurrentUser();
-  });
+  }, []);
 
-  return <div>{isAuthenticated ? props.children : <Blocked />}</div>;
+  return (
+    <div>
+      {loading ? (
+        <div style={{ color: "white" }}>loading</div>
+      ) : isAuthenticated ? (
+        props.children
+      ) : isLoginPage ? (
+        props.children
+      ) : (
+        <Blocked />
+      )}
+    </div>
+  );
 }

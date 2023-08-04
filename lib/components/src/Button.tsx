@@ -7,13 +7,12 @@ const StyledButton = styled.button`
   align-items: center;
   float: left;
   background-color: ${lightPrimary};
+  color: ${lightText};
   border: none;
   padding: 15px;
-  margin-bottom: 20px;
-  font-size: 20px;
-  font-weight: 300;
+  font-size: 18px;
+  font-weight: 600 !important;
   border-radius: 50px;
-  color: ${lightText};
   cursor: pointer;
   &:hover {
     background-color: rgba(30, 135, 240, 0.7);

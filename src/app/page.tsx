@@ -1,6 +1,4 @@
 "use client";
-import { ToastContainer } from "react-toastify";
-import { Layout } from "../../lib/layout/Layout";
 
 const App = function () {
   // app ilk acildiginde getLoggedInUser istegi attin, istek basarili sonuclandiysa dispatch(login()) yaptin
@@ -10,10 +8,7 @@ const App = function () {
 
   return (
     <>
-      <Layout>
-        <div>dsadsadas</div>
-      </Layout>
-      <ToastContainer />
+      <div style={{ color: "white" }}>dsaddddddsadas</div>
     </>
   );
 };

@@ -1,6 +1,5 @@
 import { lightError, lightText } from "@/app/global-styles";
 import { styled } from "styled-components";
-import PhoneIcon from "../../icons/PhoneIcon";
 
 export type InputFieldProps = {
   placeholder: string;
@@ -14,7 +13,7 @@ export type InputFieldProps = {
   onChange: (event: any | undefined) => void;
 };
 
-const StyledInput = styled.input<{ errors: boolean }>`
+const StyledInput = styled.input<{ errors: boolean; type: string }>`
   background-image: linear-gradient(
       ${(props) => (props.errors ? lightError : "#20aee3")},
       ${(props) => (props.errors ? lightError : "#20aee3")}
@@ -43,10 +42,17 @@ const StyledInput = styled.input<{ errors: boolean }>`
     background-size: 100% 2px, 100% 1px;
     outline: 0 none;
     transition-duration: 0.3s;
-    color: ${lightText};
   }
   ::placeholder {
     color: ${lightText};
+  }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
   }
 `;
 

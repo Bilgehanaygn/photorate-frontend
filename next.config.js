@@ -11,6 +11,19 @@ const devOptions = {
   },
 };
 
-const nextConfig = { ...devOptions };
+const customConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "actualphotobucket.s3.eu-central-1.amazonaws.com",
+        port: "",
+        pathname: "**",
+      },
+    ],
+  },
+};
+
+const nextConfig = { ...devOptions, ...customConfig };
 
 module.exports = nextConfig;

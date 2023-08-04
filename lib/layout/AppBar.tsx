@@ -8,7 +8,7 @@ import LogoutIcon from "../icons/LogoutIcon";
 export const APPBAR_HEIGHT = 65;
 
 const AppBarContainer = styled.div<{ $sidebarOpen?: boolean }>`
-  width: calc(100vw - ${(props) => (props.$sidebarOpen ? SIDEBAR_WIDTH : 0)}px);
+  width: calc(100% - ${(props) => (props.$sidebarOpen ? SIDEBAR_WIDTH : 0)}px);
   height: ${APPBAR_HEIGHT}px;
   background-color: ${lightSecondary};
   box-sizing: border-box;
@@ -17,7 +17,6 @@ const AppBarContainer = styled.div<{ $sidebarOpen?: boolean }>`
   justify-content: space-between;
   align-items: center;
   padding: 5px 20px 5px 10px;
-  box-shadow: 0px 5px 5px #888888;
 `;
 
 export const AppBar = (props: {

@@ -1,32 +1,34 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import ReactDom from "react-dom";
-import { styled } from "styled-components";
-import LoginForm from "../../../lib/components/src/LoginForm";
-
-const Overlay = styled.div`
-  display: block;
-  position: fixed;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 2;
-`;
+import LoginForm from "../../../lib/app-components/src/LoginForm";
+import Overlay from "../../../lib/components/src/Overlay";
+import { getLoggedInUser } from "../../../lib/api/user";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const ref = useRef<Element | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [isRouting, setIsRouting] = useState<boolean>(true);
+  const router = useRouter();
 
   useEffect(() => {
+    async function setCurrentUser() {
+      try {
+        //if the user logged in navigate to the home page
+        const user = await getLoggedInUser();
+        router.push("/");
+      } catch (err) {
+        //if the user not logged in allow to see the login page
+        setIsRouting(false);
+      }
+    }
+    setCurrentUser();
     ref.current = document.getElementById("portal");
     setMounted(true);
   }, []);
 
-  return mounted && ref.current
+  return mounted && ref.current && !isRouting
     ? ReactDom.createPortal(
         <Overlay>
           <LoginForm />

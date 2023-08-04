@@ -4,27 +4,33 @@ import { SIDEBAR_WIDTH, Sidebar } from "./SideBar";
 import styled from "styled-components";
 import { AppBar } from "./AppBar";
 import { Private } from "../private/Private";
-import { breakpoint } from "@/app/global-styles";
+import { breakpoint, lightSecondary } from "@/app/global-styles";
 
 const LayoutRoot = styled.div`
-  width: 100%;
-  height: 100;
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 const LayoutContainer = styled.div<{
-  breaksDown: boolean;
-  sidebarOpen: boolean;
+  $breaksDown: boolean;
+  $sidebarOpen: boolean;
 }>`
-  display: flex;
-  flex: auto;
+  display: block;
   height: 100%;
-  width: 100%;
+  width: 800px;
+  border-right: 1px solid ${lightSecondary};
   padding-left: ${(props) =>
-    props.breaksDown ? 20 : props.sidebarOpen ? SIDEBAR_WIDTH + 20 : 20}px;
+    props.$breaksDown ? 20 : props.$sidebarOpen ? SIDEBAR_WIDTH + 20 : 20}px;
   box-sizing: border-box;
 `;
 
-export function Layout(props: { children?: JSX.Element | JSX.Element[] }) {
+export function Layout(props: {
+  children?: JSX.Element | JSX.Element[] | React.ReactNode;
+}) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const breaksDown = window.innerWidth < 1000;
@@ -34,19 +40,13 @@ export function Layout(props: { children?: JSX.Element | JSX.Element[] }) {
   }
 
   return (
-    <>
-      <Private>
-        <LayoutRoot>
-          <AppBar
-            toggleSidebar={toggleSidebar}
-            sidebarOpen={sidebarOpen}
-          ></AppBar>
-          <Sidebar open={sidebarOpen} />
-          <LayoutContainer breaksDown={breaksDown} sidebarOpen={sidebarOpen}>
-            {props.children}
-          </LayoutContainer>
-        </LayoutRoot>
-      </Private>
-    </>
+    <Private>
+      <LayoutRoot>
+        <Sidebar open={sidebarOpen} />
+        <LayoutContainer $breaksDown={breaksDown} $sidebarOpen={sidebarOpen}>
+          {props.children}
+        </LayoutContainer>
+      </LayoutRoot>
+    </Private>
   );
 }
