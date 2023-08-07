@@ -37,13 +37,13 @@ export default function Image() {
   };
 
   const handleUploadClick = async () => {
-    await axios.post(
-      "http://localhost:8080/api/v1/s3",
-      {
-        content: await files![0].text(),
-      }
-      // { withCredentials: true }
-    );
+    // await axios.post(
+    //   "http://localhost:8080/api/v1/s3",
+    //   {
+    //     content: await files![0].text(),
+    //   }
+    //   // { withCredentials: true }
+    // );
   };
 
   return (

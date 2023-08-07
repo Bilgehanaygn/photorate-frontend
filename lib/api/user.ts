@@ -12,6 +12,8 @@ export const getLoggedInUser = async function () {
     `${baseUrl}/getLoggedInUser`,
     { withCredentials: true }
   );
+  console.log(response.data);
+
   if (response.data) {
     return response.data;
   }
@@ -20,7 +22,7 @@ export const getLoggedInUser = async function () {
 
 export const uploadImage = async function (formData: FormData) {
   const { data: response } = await axios.post<MessageResponse>(
-    "http://localhost:8080/api/v1/s3",
+    "http://localhost:8080/api/v1/image",
     formData,
     {
       withCredentials: true,
@@ -33,7 +35,7 @@ export const uploadImage = async function (formData: FormData) {
 
 export const getImageLink = async function (imageId: String) {
   const { data } = await axios.get(
-    `http://localhost:8080/api/v1/s3/${imageId}`
+    `http://localhost:8080/api/v1/image/${imageId}`
   );
 
   return data;

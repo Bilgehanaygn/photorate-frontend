@@ -13,12 +13,28 @@ export const register = async function (phoneNum: string) {
 };
 
 export const signin = async function (phoneNum: string, otp: string) {
-  const response = await axios.post<UserViewModel>(
+  const response = await axios.post<MessageResponse>(
     `${baseUrl}/login`,
     {
       phoneNum: phoneNum,
       otp: otp,
     },
+    { withCredentials: true }
+  );
+
+  return response.data;
+};
+
+export const reviewerSignIn = async function (
+  phoneNum: string,
+  password: string
+) {
+  const formData = new FormData();
+  formData.append("phoneNum", phoneNum);
+  formData.append("password", password);
+  const response = await axios.post<UserViewModel>(
+    baseUrl + "/reviewerLogin",
+    formData,
     { withCredentials: true }
   );
 

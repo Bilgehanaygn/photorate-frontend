@@ -14,6 +14,8 @@ import Image from "next/image";
 import IconButton from "../components/src/IconButton";
 import { useState } from "react";
 import UploadForm from "../app-components/src/UploadForm";
+import { useAppSelector } from "../store/store";
+import RateIcon from "../icons/RateIcon";
 
 export const SIDEBAR_WIDTH = 300;
 
@@ -30,6 +32,7 @@ export const Sidebar = (props: { open: boolean; children?: JSX.Element }) => {
   const [uploadModalOpen, setUploadModalOpen] = useState<boolean>(false);
   const router = useRouter();
   const pathname = usePathname();
+  const userRole = useAppSelector((state) => state.user.userInfo?.role);
 
   const handleMenuButtonClick = (action: Actions) => {
     if (action === Actions.UPLOAD) {
@@ -63,7 +66,7 @@ export const Sidebar = (props: { open: boolean; children?: JSX.Element }) => {
 
   type Actions = (typeof Actions)[keyof typeof Actions];
 
-  return (
+  return userRole === "USER" || !userRole ? (
     <StyledSidebar $sidebarOpen={props.open}>
       {uploadModalOpen ? (
         <UploadForm
@@ -132,6 +135,31 @@ export const Sidebar = (props: { open: boolean; children?: JSX.Element }) => {
         }}
       >
         <UserIcon />
+      </MenuButton>
+    </StyledSidebar>
+  ) : (
+    <StyledSidebar $sidebarOpen={props.open}>
+      {uploadModalOpen ? (
+        <UploadForm
+          onModalCloseClick={() => {
+            console.log("clicked");
+            setUploadModalOpen(false);
+          }}
+        />
+      ) : null}
+      <div>
+        <IconButton onClickEvent={() => {}}>
+          <Image src={Logo} alt="logo" width="40" height="40" />
+        </IconButton>
+      </div>
+      <MenuButton
+        isSelected={pathname === "/review"}
+        text={"Review"}
+        onClickEvent={() => {
+          router.push("/review");
+        }}
+      >
+        <RateIcon />
       </MenuButton>
     </StyledSidebar>
   );

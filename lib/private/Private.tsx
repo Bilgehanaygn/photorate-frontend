@@ -18,6 +18,7 @@ export function Private(props: { children: JSX.Element | JSX.Element[] }) {
   const router = useRouter();
   const pathname = usePathname();
   const isLoginPage = pathname === "/login";
+  const isReviewerLoginpage = pathname === "/reviewer-login";
 
   const isAuthenticated = useAppSelector(
     (state) => state.user.userInfo !== undefined
@@ -27,6 +28,10 @@ export function Private(props: { children: JSX.Element | JSX.Element[] }) {
     // configureAxios(() => dispatch(logout()), router);
     async function setCurrentUser() {
       try {
+        if (isReviewerLoginpage) {
+          setLoading(false);
+          return;
+        }
         const user = await getLoggedInUser();
         dispatch(login(user));
         if (pathname === "/login") {
@@ -48,7 +53,7 @@ export function Private(props: { children: JSX.Element | JSX.Element[] }) {
         <div style={{ color: "white" }}>loading</div>
       ) : isAuthenticated ? (
         props.children
-      ) : isLoginPage ? (
+      ) : isLoginPage || isReviewerLoginpage ? (
         props.children
       ) : (
         <Blocked />

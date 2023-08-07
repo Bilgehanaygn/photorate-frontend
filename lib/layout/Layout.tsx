@@ -23,8 +23,6 @@ const LayoutContainer = styled.div<{
   height: 100%;
   width: 800px;
   border-right: 1px solid ${lightSecondary};
-  padding-left: ${(props) =>
-    props.$breaksDown ? 20 : props.$sidebarOpen ? SIDEBAR_WIDTH + 20 : 20}px;
   box-sizing: border-box;
 `;
 

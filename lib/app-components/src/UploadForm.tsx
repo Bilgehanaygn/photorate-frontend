@@ -185,12 +185,8 @@ const UploadForm = (props: { onModalCloseClick: () => void }) => {
               </div>
               <div
                 style={{
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  padding: 10,
+                  width: "50%",
+                  margin: "auto",
                 }}
               >
                 <Button onClick={handleUploadClick} text="Upload" />
